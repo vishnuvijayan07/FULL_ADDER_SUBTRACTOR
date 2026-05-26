@@ -57,26 +57,30 @@ Borrow out = A'Bin + A'B + BBin
 
 i)FULL ADDER
 
-module funct1(a,b,c,d,f1);
-
-input a,b,c,d;
-
-output f1;
-
-assign f1=((~b & ~d)|(~a & b & d)|(a & b & ~c));
-
+module exp4(df,bo,a,b,bin);
+output df;
+output bo;
+input a;
+input b;
+input bin;
+wire w1,w2,w3;
+assign w1=a^b;
+assign w2=(~a&b);
+assign w3=(~w1&bin);
+assign df=w1^bin;
+assign bo=w2|w3;
 endmodule
 
 ii)FULL SUBTRACTOR
 
-module funct2(w,x,y,z,f2);
-
-input w,x,y,z;
-
-output f2;
-
-assign f2=((~y & z)|( w & y )|(x & y));
-
+module full_subtractor(diff, borrow, a, b, bin);
+  output diff;
+  output borrow;
+  input a;
+  input b;
+  input bin;
+  assign diff = a ^ b ^ bin;
+  assign borrow = (~a & b) | (~(a ^ b) & bin);
 endmodule
 
 
